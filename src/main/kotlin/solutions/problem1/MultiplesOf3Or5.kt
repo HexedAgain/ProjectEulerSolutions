@@ -12,7 +12,7 @@ class MultiplesOf3Or5: NoArgSolution<Int> {
     override val problemName = "Multiples of 3 or 5"
 
     override fun solve(): Int {
-        return multiplesUpToN(1000)
+        return multiplesUpToN(999)
     }
 
 

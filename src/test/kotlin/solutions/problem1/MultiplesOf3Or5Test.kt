@@ -27,7 +27,7 @@ class MultiplesOf3Or5Test {
     }
 
     @Test
-    fun `multiplesUpToN, if n is 999 it returns 233168`() {
-        assertEquals(233168, MultiplesOf3Or5().multiplesUpToN(max = 999))
+    fun `solve, it returns 233168`() {
+        assertEquals(233168, MultiplesOf3Or5().solve())
     }
 }
