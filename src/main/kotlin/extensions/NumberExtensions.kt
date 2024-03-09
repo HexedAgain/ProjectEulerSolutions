@@ -12,3 +12,10 @@ fun Long.isEven(): Boolean {
 fun Long.isOdd(): Boolean {
     return this % 2 == 1L
 }
+
+fun Int.isPositive(): Boolean {
+    return this > 0
+}
+fun Long.isPositive(): Boolean {
+    return this > 0L
+}
