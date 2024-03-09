@@ -1,6 +1,8 @@
 package solutions.project1
 
 import solutions.NoArgSolution
+import kotlin.math.ceil
+import kotlin.math.floor
 
 /*
    If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -20,11 +22,16 @@ class MultiplesOf3Or5: NoArgSolution<Int> {
         return sum(3, max) + sum(5, max) - sum(15, max)
     }
 
-    private fun sum(n: Int, max: Int): Int {
+    private fun sumLinear(n: Int, max: Int): Int {
         var sum = 0
         (n..max step n).forEach {
             sum += it
         }
         return sum
+    }
+
+    private fun sum(n: Int, max: Int): Int {
+        val numTerms = floor(max.toDouble() / n)
+        return n * (numTerms * (numTerms + 1) / 2).toInt()
     }
 }
