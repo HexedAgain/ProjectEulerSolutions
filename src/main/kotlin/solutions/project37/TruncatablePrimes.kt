@@ -2,6 +2,7 @@ package solutions.project37
 
 import extensions.*
 import solutions.NoArgSolution
+import utils.primes.PrimeChecker
 import utils.primes.PrimeSieve
 import kotlin.math.log10
 import kotlin.math.pow
@@ -17,37 +18,32 @@ class TruncatablePrimes(
     private val primesUpto: Int = 1000_000,
 ): NoArgSolution<Int> {
     private lateinit var primes: Set<Int>
+    private val primeChecker = PrimeChecker()
     override val problemNumber = 37
     override val problemName = "Truncatable Primes"
 
     var candidatePrimes: MutableList<Int> = mutableListOf()
 
     override fun solve(): Int {
-        return getBothWayTruncatablePrimes().sum()
+        return getBothWayTruncatablePrimes3().sum()
     }
 
-    fun getBothWayTruncatablePrimes2(): List<Int> {
+    fun getBothWayTruncatablePrimes3(): List<Int> {
         if (primesUpto < 23) return listOf()
-        val primesList = PrimeSieve(maxPrime = primesUpto).sieve() // sieving and turning sieve to set is probably expensive
-        primes = primesList.toSet()
-        primesList.filter { it in 23..99 }.forEach {
-            if (isLeftTruncatable(it)) {
-                candidatePrimes.add(it)
-            }
-        }
+        candidatePrimes = (23..99).filter { primeChecker.checkPrime(it) && isLeftTruncatable2(it) }.toMutableList()
         (3..log10(primesUpto.toDouble()).toInt()).forEach {
             val minPrime = 10.0.pow(it - 2)
             val oldList = candidatePrimes.filter { p -> p > minPrime }
             oldList.forEach { p ->
                 listOf(1,3,7,5,9).forEach { digit ->
                     val newP = p * 10 + digit
-                    if (primes.contains(newP) && isLeftTruncatable(newP)) {
+                    if (primeChecker.checkPrime(newP) && isLeftTruncatable2(newP)) {
                         candidatePrimes.add(newP)
                     }
                 }
             }
         }
-        return candidatePrimes.filter { isRightTruncatable(it) }
+        return candidatePrimes.filter { isRightTruncatable2(it) && it <= primesUpto }
     }
 
     fun getBothWayTruncatablePrimes(): List<Int> {
@@ -77,11 +73,31 @@ class TruncatablePrimes(
         return true
     }
 
+    private fun isLeftTruncatable2(prime: Int): Boolean {
+        var truncatedPrime = prime
+        while (truncatedPrime > 0) {
+            if (!primeChecker.checkPrime(truncatedPrime)) return false
+            truncatedPrime /= 10
+        }
+        return true
+    }
+
     private fun isRightTruncatable(prime: Int): Boolean {
         var truncatedPrime = prime
         var modulo = prime.clampToPowTen()
         while (modulo > 0) {
             if (!primes.contains(truncatedPrime)) return false
+            truncatedPrime %= modulo
+            modulo /= 10
+        }
+        return true
+    }
+
+    private fun isRightTruncatable2(prime: Int): Boolean {
+        var truncatedPrime = prime
+        var modulo = prime.clampToPowTen()
+        while (modulo > 0) {
+            if (!primeChecker.checkPrime(truncatedPrime)) return false
             truncatedPrime %= modulo
             modulo /= 10
         }
