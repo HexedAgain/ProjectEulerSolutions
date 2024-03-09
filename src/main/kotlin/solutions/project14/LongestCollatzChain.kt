@@ -1,9 +1,12 @@
 package solutions.project14
 
 import extensions.isEven
+import solutions.OneArgSolution
 import solutions.Solution
+import solutions.project14.LongestCollatzChain.MaxChain
 
-class LongestCollatzChain: Solution {
+@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+class LongestCollatzChain: OneArgSolution<Long, MaxChain> {
     override val problemNumber = 14
     override val problemName = "Longest Collatz Chain"
 
@@ -15,7 +18,7 @@ class LongestCollatzChain: Solution {
 
     private val knownChainLengths = mutableMapOf(1L to 4L, 2L to 2L)
     private val chain = mutableListOf<Long>()
-    fun solve(max: Long): MaxChain {
+    override fun solve(max: Long): MaxChain {
         if (max <= 0L) return MaxChain(0, 0)
         (1..max).forEach {
             if (!knownChainLengths.containsKey(it)) {
