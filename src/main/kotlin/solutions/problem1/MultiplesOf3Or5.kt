@@ -1,7 +1,6 @@
-package solutions.project1
+package solutions.problem1
 
 import solutions.NoArgSolution
-import kotlin.math.ceil
 import kotlin.math.floor
 
 /*

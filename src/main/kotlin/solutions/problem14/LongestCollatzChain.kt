@@ -1,9 +1,8 @@
-package solutions.project14
+package solutions.problem14
 
 import extensions.isEven
 import solutions.OneArgSolution
-import solutions.Solution
-import solutions.project14.LongestCollatzChain.MaxChain
+import solutions.problem14.LongestCollatzChain.MaxChain
 
 @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 class LongestCollatzChain: OneArgSolution<Long, MaxChain> {

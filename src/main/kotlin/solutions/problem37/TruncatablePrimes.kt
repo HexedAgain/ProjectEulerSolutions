@@ -1,4 +1,4 @@
-package solutions.project37
+package solutions.problem37
 
 import extensions.*
 import solutions.NoArgSolution

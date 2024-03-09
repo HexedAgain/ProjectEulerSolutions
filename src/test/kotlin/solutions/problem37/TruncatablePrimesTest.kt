@@ -2,7 +2,6 @@ package solutions.problem37
 
 import junit.framework.Assert.assertEquals
 import org.junit.Test
-import solutions.project37.TruncatablePrimes
 
 
 class TruncatablePrimesTest {
