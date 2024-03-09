@@ -39,7 +39,7 @@ class TruncatablePrimesTest {
         assertEquals(listOf(23, 37, 53, 73), result)
     }
     @Test
-    fun `bothWayTruncatablePrimes, if max prime is 1000_000, it returns list (23, 37, 53, 73, 313, 373, 3137, 3797, 739397)`() {
+    fun `bothWayTruncatablePrimes, if max prime is 1000_000, it returns list (23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797, 739397)`() {
         val result = TruncatablePrimes(primesUpto = 1000_000).getBothWayTruncatablePrimes()
 
         assertEquals(listOf(23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797, 739397), result)
@@ -47,8 +47,9 @@ class TruncatablePrimesTest {
 
     @Test
     fun `solve, it returns the sum of primes up to 1000_000 that are both way truncatable`() {
-        val result = TruncatablePrimes().solve()
-
-        assertEquals(748317, result)
+        (0..99).forEach {
+            val result = TruncatablePrimes().solve()
+            assertEquals(748317, result)
+        }
     }
 }

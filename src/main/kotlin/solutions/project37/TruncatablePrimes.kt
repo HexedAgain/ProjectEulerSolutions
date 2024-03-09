@@ -3,6 +3,8 @@ package solutions.project37
 import extensions.*
 import solutions.NoArgSolution
 import utils.primes.PrimeSieve
+import kotlin.math.log10
+import kotlin.math.pow
 
 /*
     The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right,
@@ -18,26 +20,37 @@ class TruncatablePrimes(
     override val problemNumber = 37
     override val problemName = "Truncatable Primes"
 
-    val leftTruncatablePrimes: MutableList<Int> = mutableListOf()
+    var candidatePrimes: MutableList<Int> = mutableListOf()
 
     override fun solve(): Int {
         return getBothWayTruncatablePrimes().sum()
     }
 
-    fun getBothWayTruncatablePrimes(): List<Int> {
+    fun getBothWayTruncatablePrimes2(): List<Int> {
         if (primesUpto < 23) return listOf()
-        val primesList = PrimeSieve(maxPrime = primesUpto).sieve()
+        val primesList = PrimeSieve(maxPrime = primesUpto).sieve() // sieving and turning sieve to set is probably expensive
         primes = primesList.toSet()
-//        primesList.filter { it in 23..99 }.forEach {
-//            if (isLeftTruncatable(it)) {
-//                leftTruncatablePrimes.add(it)
-//            }
-//        }
-        val x = 123.firstNDigits(digits = 2)
-        return primesList.filter(::truncatablePredicate)
+        primesList.filter { it in 23..99 }.forEach {
+            if (isLeftTruncatable(it)) {
+                candidatePrimes.add(it)
+            }
+        }
+        (3..log10(primesUpto.toDouble()).toInt()).forEach {
+            val minPrime = 10.0.pow(it - 2)
+            val oldList = candidatePrimes.filter { p -> p > minPrime }
+            oldList.forEach { p ->
+                listOf(1,3,7,5,9).forEach { digit ->
+                    val newP = p * 10 + digit
+                    if (primes.contains(newP) && isLeftTruncatable(newP)) {
+                        candidatePrimes.add(newP)
+                    }
+                }
+            }
+        }
+        return candidatePrimes.filter { isRightTruncatable(it) }
     }
 
-    fun getBothWayTruncatablePrimes2(): List<Int> {
+    fun getBothWayTruncatablePrimes(): List<Int> {
         if (primesUpto < 23) return listOf()
         val primesList = PrimeSieve(maxPrime = primesUpto).sieve()
         primes = primesList.toSet()
