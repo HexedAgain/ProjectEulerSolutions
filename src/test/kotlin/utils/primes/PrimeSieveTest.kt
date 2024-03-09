@@ -1,9 +1,8 @@
 package utils.primes
 
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.io.File
-import java.lang.Integer.parseInt
 import java.lang.Long.parseLong
 
 class PrimeSieveTest {

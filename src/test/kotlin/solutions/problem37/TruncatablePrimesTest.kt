@@ -1,6 +1,6 @@
 package solutions.problem37
 
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 
