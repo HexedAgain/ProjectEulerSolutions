@@ -26,8 +26,8 @@ class PrimeCheckerTest {
     }
     @Test
     fun `for all odd composite numbers between 3 and 100_000 it returns false`() {
-        val primesLT100_000 = PrimeSieve(maxPrime = 100_000).sieve()
-        val nonPrimes = (1..100_000).filter { !primesLT100_000.contains(it) && it.isOdd() }
+        val primesLT100_000 = PrimeSieve(maxPrime = 100_000L).sieve()
+        val nonPrimes = (1..100_000L).filter { !primesLT100_000.contains(it) && it.isOdd() }
         val primeChecker = PrimeChecker()
         nonPrimes.forEach {
             print(it)
@@ -37,7 +37,7 @@ class PrimeCheckerTest {
     @Test
     fun `for all odd composite numbers between 100_001 and 200_000 it returns false`() {
         val primesLT200_000 = PrimeSieve(maxPrime = 200_000).sieve()
-        val nonPrimes = (100_001..200_000).filter { !primesLT200_000.contains(it) && it.isOdd() }
+        val nonPrimes = (100_001..200_000L).filter { !primesLT200_000.contains(it) && it.isOdd() }
         val primeChecker = PrimeChecker()
         nonPrimes.forEach {
             assertFalse(primeChecker.checkPrime(it))
@@ -46,7 +46,7 @@ class PrimeCheckerTest {
     @Test
     fun `for all odd composite numbers between 200_001 and 300_000 it returns false`() {
         val primesLT300_000 = PrimeSieve(maxPrime = 300_000).sieve()
-        val nonPrimes = (200_001..300_000).filter { !primesLT300_000.contains(it) && it.isOdd() }
+        val nonPrimes = (200_001..300_000L).filter { !primesLT300_000.contains(it) && it.isOdd() }
         val primeChecker = PrimeChecker()
         nonPrimes.forEach {
             assertFalse(primeChecker.checkPrime(it))
@@ -55,7 +55,7 @@ class PrimeCheckerTest {
     @Test
     fun `for all odd composite numbers between 300_001 and 400_000 it returns false`() {
         val primesLT400_000 = PrimeSieve(maxPrime = 400_000).sieve()
-        val nonPrimes = (300_001..400_000).filter { !primesLT400_000.contains(it) && it.isOdd() }
+        val nonPrimes = (300_001..400_000L).filter { !primesLT400_000.contains(it) && it.isOdd() }
         val primeChecker = PrimeChecker()
         nonPrimes.forEach {
             assertFalse(primeChecker.checkPrime(it))
@@ -64,7 +64,7 @@ class PrimeCheckerTest {
     @Test
     fun `for all odd composite numbers between 400_001 and 500_000 it returns false`() {
         val primesLT500_000 = PrimeSieve(maxPrime = 500_000).sieve()
-        val nonPrimes = (400_001..500_000).filter { !primesLT500_000.contains(it) && it.isOdd() }
+        val nonPrimes = (400_001..500_000L).filter { !primesLT500_000.contains(it) && it.isOdd() }
         val primeChecker = PrimeChecker()
         nonPrimes.forEach {
             assertFalse(primeChecker.checkPrime(it))
