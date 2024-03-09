@@ -2,7 +2,9 @@ package solutions.project37
 
 import solutions.NoArgSolution
 import utils.primes.PrimeSieve
+import utils.primes.clampToPowTen
 import kotlin.math.log10
+import kotlin.math.pow
 
 /*
     The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right,
@@ -18,9 +20,6 @@ class TruncatablePrimes(
     override val problemNumber = 37
     override val problemName = "Truncatable Primes"
 
-    private val leftTruncatablePrimes: MutableList<Int> = mutableListOf()
-    private val rightTruncatablePrimes: MutableList<Int> = mutableListOf()
-
     override fun solve(): Int {
         return getBothWayTruncatablePrimes().sum()
     }
@@ -29,15 +28,18 @@ class TruncatablePrimes(
         if (primesUpto < 23) return listOf()
         val primesList = PrimeSieve(maxPrime = primesUpto).sieve()
         primes = primesList.toSet()
-        primesList.filter { it >= 23 }.forEach {
-            if (isLeftTruncatable(it)) {
-                leftTruncatablePrimes.add(it)
-            }
-            if (isRightTruncatable(it)) {
-                rightTruncatablePrimes.add(it)
-            }
-        }
-        return leftTruncatablePrimes.filter { rightTruncatablePrimes.contains(it) }
+        return primesList.filter(::truncatablePredicate)
+    }
+
+    private fun truncatablePredicate(prime: Int): Boolean {
+        val lastDigit = prime % 10
+        val firstDigit = prime / clampToPowTen(prime)
+        return prime >= 23 &&
+               (firstDigit == 2 || firstDigit == 3 || firstDigit == 5 || firstDigit == 7) &&
+               (lastDigit == 2 || lastDigit == 3 || lastDigit == 5 || lastDigit == 7) &&
+               isLeftTruncatable(prime) &&
+               isRightTruncatable(prime)
+
     }
 
     private fun isLeftTruncatable(prime: Int): Boolean {
@@ -51,7 +53,7 @@ class TruncatablePrimes(
 
     private fun isRightTruncatable(prime: Int): Boolean {
         var truncatedPrime = prime
-        var modulo = Math.pow(10.0, log10(prime.toDouble()).toInt().toDouble()).toInt()
+        var modulo = clampToPowTen(prime)
         while (modulo > 0) {
             if (!primes.contains(truncatedPrime)) return false
             truncatedPrime %= modulo
