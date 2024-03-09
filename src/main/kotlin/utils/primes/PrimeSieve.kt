@@ -1,12 +1,13 @@
 package utils.primes
 
 import extensions.isPositive
+import kotlin.math.sqrt
 
 class PrimeSieve(
     private val maxPrime: Int
 ) {
     private val _maxPrime = (maxPrime - 1) / 2
-    private val _sqrtMaxPrime = Math.sqrt(maxPrime.toDouble())
+    private val _sqrtMaxPrime = sqrt(maxPrime.toDouble())
     private val sievePrimes: MutableList<Int>
     init {
         val capacity = ((maxPrime.takeIf { it > 2 } ?: 0) + 1) / 2

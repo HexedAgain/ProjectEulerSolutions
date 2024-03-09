@@ -2,15 +2,8 @@ package utils.primes
 
 import junit.framework.Assert.assertEquals
 import org.junit.Test
-import java.io.BufferedReader
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileReader
-import java.io.OutputStream
-import java.io.Reader
 import java.lang.Integer.parseInt
-import java.nio.file.Path
-import java.nio.file.Paths
 
 class PrimeSieveTest {
     @Test
