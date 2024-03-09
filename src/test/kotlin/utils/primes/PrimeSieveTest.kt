@@ -13,7 +13,7 @@ class PrimeSieveTest {
     }
 
     @Test
-    fun `if maxPrime is one, it returns empty list`() {
+    fun `if maxPrime is 1, it returns empty list`() {
         assertEquals(emptyList<Int>(), PrimeSieve(maxPrime = 1).sieve())
     }
 
