@@ -65,3 +65,10 @@ fun Long.lastNDigits(digits: Int): Long {
     val powTenDigits = 10.0.pow(digits)
     return if (this < powTenDigits) this else (this % powTenDigits).toLong()
 }
+
+infix fun Int.divides(rhs: Int): Boolean {
+    return ((rhs / this) * this == rhs)
+}
+infix fun Long.divides(rhs: Long): Boolean {
+    return ((rhs / this) * this == rhs)
+}
