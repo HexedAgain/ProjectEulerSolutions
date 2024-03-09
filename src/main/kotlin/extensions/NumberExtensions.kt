@@ -1,5 +1,8 @@
 package extensions
 
+import kotlin.math.log10
+import kotlin.math.pow
+
 fun Int.isEven(): Boolean {
     return this % 2 == 0
 }
@@ -18,4 +21,38 @@ fun Int.isPositive(): Boolean {
 }
 fun Long.isPositive(): Boolean {
     return this > 0L
+}
+
+/**
+ * Returns max power of 10 LTE to input integer
+ */
+fun Int.clampToPowTen(): Int {
+    val log10 = log10(this.toDouble()).toInt()
+    return 10.0.pow(log10.toDouble()).toInt()
+}
+
+/**
+ * Returns max power of 10 LTE to input long
+ */
+fun Long.clampToPowTen(): Long {
+    val log10 = log10(this.toDouble()).toLong()
+    return 10.0.pow(log10.toDouble()).toLong()
+}
+
+fun Int.firstDigit(): Int {
+    return this / this.clampToPowTen()
+}
+
+fun Int.firstNDigits(digits: Int): Int {
+    val powTenDigits = 10.0.pow(digits - 1)
+    return if (this < powTenDigits) this else ((this * powTenDigits) / this.clampToPowTen()).toInt()
+}
+
+fun Long.firstDigit(): Int {
+    return (this / this.clampToPowTen()).toInt()
+}
+
+fun Long.firstNDigits(digits: Int): Long {
+    val powTenDigits = 10.0.pow(digits - 1)
+    return if (this < powTenDigits) this else ((this * powTenDigits) / this.clampToPowTen()).toLong()
 }

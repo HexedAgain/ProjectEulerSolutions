@@ -1,10 +1,8 @@
 package solutions.project37
 
+import extensions.*
 import solutions.NoArgSolution
 import utils.primes.PrimeSieve
-import utils.primes.clampToPowTen
-import kotlin.math.log10
-import kotlin.math.pow
 
 /*
     The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right,
@@ -20,6 +18,8 @@ class TruncatablePrimes(
     override val problemNumber = 37
     override val problemName = "Truncatable Primes"
 
+    val leftTruncatablePrimes: MutableList<Int> = mutableListOf()
+
     override fun solve(): Int {
         return getBothWayTruncatablePrimes().sum()
     }
@@ -28,12 +28,25 @@ class TruncatablePrimes(
         if (primesUpto < 23) return listOf()
         val primesList = PrimeSieve(maxPrime = primesUpto).sieve()
         primes = primesList.toSet()
+//        primesList.filter { it in 23..99 }.forEach {
+//            if (isLeftTruncatable(it)) {
+//                leftTruncatablePrimes.add(it)
+//            }
+//        }
+        val x = 123.firstNDigits(digits = 2)
+        return primesList.filter(::truncatablePredicate)
+    }
+
+    fun getBothWayTruncatablePrimes2(): List<Int> {
+        if (primesUpto < 23) return listOf()
+        val primesList = PrimeSieve(maxPrime = primesUpto).sieve()
+        primes = primesList.toSet()
         return primesList.filter(::truncatablePredicate)
     }
 
     private fun truncatablePredicate(prime: Int): Boolean {
         val lastDigit = prime % 10
-        val firstDigit = prime / clampToPowTen(prime)
+        val firstDigit = prime.firstDigit()
         return prime >= 23 &&
                (firstDigit == 2 || firstDigit == 3 || firstDigit == 5 || firstDigit == 7) &&
                (lastDigit == 2 || lastDigit == 3 || lastDigit == 5 || lastDigit == 7) &&
@@ -53,7 +66,7 @@ class TruncatablePrimes(
 
     private fun isRightTruncatable(prime: Int): Boolean {
         var truncatedPrime = prime
-        var modulo = clampToPowTen(prime)
+        var modulo = prime.clampToPowTen()
         while (modulo > 0) {
             if (!primes.contains(truncatedPrime)) return false
             truncatedPrime %= modulo
