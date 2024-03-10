@@ -1,8 +1,7 @@
 package solutions.problems1_100.problems1_10.problem3
 
 import extensions.divides
-import extensions.iSqrt
-import extensions.lSqrt
+import utils.numbers.lSqrt
 import solutions.NoArgSolution
 import utils.primes.PrimeSieve
 
