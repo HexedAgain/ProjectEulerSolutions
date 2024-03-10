@@ -17,6 +17,10 @@ class SpecialPythagoreanTriplet: NoArgSolution<Int> {
         until we finished. The value of a, b, will put an upper bound on c.
         From the form of the equation we know that either all 3 squares are even, or one square is even. (Since if an
         odd number of odd squares will add to an odd number =/= 1000).
+        
+        There are some ways to generate pythagorean triplets - wikipedia says that starting from 5, every 2nd one is the
+        largest side of such a triangle, and so we can try to fix one of the sides at (5, 13, 34, 89, ...), we can also
+        try multiples of these
     """.trimIndent()
 
     override fun solve(): Int {
