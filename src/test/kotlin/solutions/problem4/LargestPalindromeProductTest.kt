@@ -19,7 +19,7 @@ class LargestPalindromeProductTest {
     }
 
     @Test
-    fun `largestPalindromeProduct, for maxDigits equal to 1 it returns 81`() {
+    fun `largestPalindromeProduct, for maxDigits equal to 1 it returns 9`() {
         assertEquals(9, LargestPalindromeProduct().largestPalindromeProduct(maxDigits = 1))
     }
     @Test
@@ -29,5 +29,9 @@ class LargestPalindromeProductTest {
     @Test
     fun `solve, returns expected answer of 906609`() {
         assertEquals(906609, LargestPalindromeProduct().solve())
+    }
+    @Test
+    fun `solveSlow, returns expected answer of 906609`() {
+        assertEquals(906609, LargestPalindromeProduct().solveSlow())
     }
 }

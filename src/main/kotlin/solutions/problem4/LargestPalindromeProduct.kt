@@ -16,6 +16,10 @@ class LargestPalindromeProduct: NoArgSolution<Int> {
         return largestPalindromeProduct(maxDigits = 3)
     }
 
+    override fun solveSlow(): Int {
+        return largestPalindromeProductSlow(maxDigits = 3)
+    }
+
     internal fun largestPalindromeProductSlow(maxDigits: Int): Int {
         var largest = 0
         val upperBound = (10.0.pow(maxDigits) - 1).toInt()
@@ -36,15 +40,11 @@ class LargestPalindromeProduct: NoArgSolution<Int> {
         (0..totalPossibleSubtraction).forEach { subtraction ->
             (0..subtraction / 2).forEach { partition ->
                 val lhs = upperBound - partition
-                val rhs = upperBound - subtraction - partition
+                val rhs = upperBound - (subtraction - partition)
                 (lhs * rhs).takeIf { isPalindrome(it) }?.let { return it }
             }
         }
         return 0
-    }
-
-    private fun getSubtractAmounts(totalAmount: Int): List<Pair<Int, Int>> {
-        return (0..totalAmount / 2).map { Pair(it, totalAmount - it) }
     }
 
     internal fun isPalindrome(n: Int): Boolean {

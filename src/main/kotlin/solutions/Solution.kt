@@ -11,4 +11,7 @@ interface OneArgSolution<In, Out>: Solution<In, Out> {
 
 interface NoArgSolution<Out>: Solution<Unit, Out> {
     fun solve(): Out
+    fun solveSlow(): Out? {
+        return null
+    }
 }
