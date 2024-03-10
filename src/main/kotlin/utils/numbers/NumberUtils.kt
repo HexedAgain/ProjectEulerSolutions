@@ -35,3 +35,14 @@ fun factorise(n: Long, primes: List<Long>): Map<Long, Long> {
         return factors
     }
 }
+
+fun fib(numTerms: Int): Int {
+    return fibTailRecursive(0, 1, numTerms)
+}
+private fun fibTailRecursive(f1: Int, f2: Int, numTerms: Int): Int {
+    return when (numTerms) {
+        1 -> 0
+        2 -> f1 + f2
+        else -> fibTailRecursive(f2, f1 + f2, numTerms - 1)
+    }
+}

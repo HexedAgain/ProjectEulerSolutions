@@ -26,9 +26,13 @@ class SpecialPythagoreanTriplet: NoArgSolution<Int> {
             c = 5, a = F_1F_4 = 1*3 = 3, b = 2F_2F_3 = 2*1*2  = 4
         if we take 7th Fibonacci number (13), then
             c = 13, a = F_2F_5 = 1*5 = 3, b = 2F_3F_4 = 2*2*3 = 12
+            
+        Sequences from this are [(5,12,13), (16,30,34), (39,80,89), (272, 546, 610)], which mapping to their sums give [30, 80, 208, 1428]
+        Most promising here is 80, since 80 * 12.5 = 1000 now each term in the second triplet is even so we can multiply
+        each term by 25 / 2 to get pythagorean triplet 200, 375, 425; and moreover 200 + 375 + 425 = 1000 :) 
     """.trimIndent()
 
     override fun solve(): Int {
-        TODO("Not yet implemented")
+        return 200 * 375 * 425
     }
 }
