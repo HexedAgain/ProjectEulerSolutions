@@ -15,6 +15,13 @@ import kotlin.math.pow
 class SmallestMultiple: NoArgSolution<Long> {
     override val problemNumber = 5
     override val problemName = "Smallest Multiple"
+    override val problemNotes = """
+        The naive approach to this one is just to multiply all numbers from 1 to 20, but this is going to be double
+        counting divisors. Really for the solution number we want to know its prime factors. If we knew that then
+        we can just multiply those (well powers of those). The solution I took here, not necessarily optimal, is to
+        first factorise each of the integers in 1..20, from this form a map of divisors and their powers, and then from
+        this find the product of prime powers.
+    """.trimIndent()
 
     override fun solve(): Long {
         return smallestMultiple(numbersUpTo = 20L)

@@ -11,6 +11,11 @@ import solutions.NoArgSolution
 class EvenFibonacciNumbers: NoArgSolution<Int> {
     override val problemNumber = 2
     override val problemName = "Even Fibonacci numbers"
+    override val problemNotes = """
+        The easiest way to do this one is just to carry out the summation in a simple for loop. I couldn't resist the
+        opportunity to introduce a tail recursive fibonacci sequence though (tail recursive is important as otherwise
+        there's a good chance of blowing the stack)
+    """.trimIndent()
 
     override fun solve(): Int {
         return sumFibRecursive(4_000_000)

@@ -3,6 +3,7 @@ package solutions
 interface Solution<In, Out> {
     val problemNumber: Int
     val problemName: String
+    val problemNotes: String
 }
 
 interface OneArgSolution<In, Out>: Solution<In, Out> {

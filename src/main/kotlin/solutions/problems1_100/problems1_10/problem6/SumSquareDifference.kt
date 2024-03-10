@@ -6,6 +6,10 @@ import solutions.NoArgSolution
 class SumSquareDifference: NoArgSolution<Int> {
     override val problemNumber = 6
     override val problemName = "Sum Square Difference"
+    override val problemNotes = """
+        I believe there is a direct formula for the sum of squares (and there is obviously an O(1) formula for the squared sum)
+        but I haven't used them here yet. This loopy solution is not optimal.
+    """.trimIndent()
 
     override fun solve(): Int {
         return squareDifference(numbersUpto = 100)
