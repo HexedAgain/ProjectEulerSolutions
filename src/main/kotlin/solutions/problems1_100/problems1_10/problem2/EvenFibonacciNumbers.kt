@@ -1,4 +1,4 @@
-package solutions.problem2
+package solutions.problems1_100.problems1_10.problem2
 
 import extensions.isEven
 import solutions.NoArgSolution

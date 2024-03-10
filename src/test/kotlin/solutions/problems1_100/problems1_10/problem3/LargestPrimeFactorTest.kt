@@ -1,7 +1,8 @@
-package solutions.problem3
+package solutions.problems1_100.problems1_10.problem3
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import solutions.problems1_100.problems1_10.problem3.LargestPrimeFactor
 
 class LargestPrimeFactorTest {
     @Test

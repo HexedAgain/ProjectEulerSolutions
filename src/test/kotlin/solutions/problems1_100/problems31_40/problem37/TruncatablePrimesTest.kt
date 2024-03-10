@@ -1,7 +1,8 @@
-package solutions.problem37
+package solutions.problems1_100.problems31_40.problem37
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import solutions.problems1_100.problems31_40.problem37.TruncatablePrimes
 
 
 class TruncatablePrimesTest {

@@ -1,4 +1,4 @@
-package solutions.problem3
+package solutions.problems1_100.problems1_10.problem3
 
 import extensions.divides
 import extensions.iSqrt

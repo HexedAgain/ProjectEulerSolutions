@@ -1,8 +1,9 @@
-package solutions.problem14
+package solutions.problems1_100.problems11_20.problem14
 
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
-import solutions.problem14.LongestCollatzChain.MaxChain
+import solutions.problems1_100.problems11_20.problem14.LongestCollatzChain
+import solutions.problems1_100.problems11_20.problem14.LongestCollatzChain.MaxChain
 
 class LongestCollatzChainTest {
     private val longestCollatzChain = LongestCollatzChain()

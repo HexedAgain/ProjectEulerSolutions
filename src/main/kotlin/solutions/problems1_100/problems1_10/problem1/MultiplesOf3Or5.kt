@@ -1,4 +1,4 @@
-package solutions.problem1
+package solutions.problems1_100.problems1_10.problem1
 
 import solutions.NoArgSolution
 import kotlin.math.floor

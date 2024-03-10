@@ -1,4 +1,4 @@
-package solutions.problem4
+package solutions.problems1_100.problems1_10.problem4
 
 import extensions.firstDigit
 import extensions.firstNDigits

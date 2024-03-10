@@ -1,6 +1,7 @@
-package solutions.problem1
+package solutions.problems1_100.problems1_10.problem1
 
 import org.junit.Test
+import solutions.problems1_100.problems1_10.problem1.MultiplesOf3Or5
 import kotlin.test.assertEquals
 
 class MultiplesOf3Or5Test {
