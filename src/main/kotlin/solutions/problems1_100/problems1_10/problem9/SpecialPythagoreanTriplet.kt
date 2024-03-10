@@ -17,10 +17,6 @@ class SpecialPythagoreanTriplet: NoArgSolution<Int> {
         until we finished. The value of a, b, will put an upper bound on c.
         From the form of the equation we know that either all 3 squares are even, or one square is even. (Since if an
         odd number of odd squares will add to an odd number =/= 1000).
-        There are some ways to generate pythagorean triplets (I recall Fibonacci is a generator of some of them,
-        I forget the derivation though :))
-        
-        Notes on the above: F_nF_(n+1) + F_(n+1)F_(n+2) = F_2(n+1)
     """.trimIndent()
 
     override fun solve(): Int {
