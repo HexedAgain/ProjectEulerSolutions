@@ -49,6 +49,10 @@ fun Int.firstNDigits(digits: Int): Int {
     return if (this < powTenDigits) this else ((this * powTenDigits) / this.clampToPowTen()).toInt()
 }
 
+fun Int.lastDigit(): Int {
+    return this % 10
+}
+
 fun Int.lastNDigits(digits: Int): Int {
     val powTenDigits = 10.0.pow(digits)
     return if (this < powTenDigits) this else (this % powTenDigits).toInt()
@@ -56,6 +60,10 @@ fun Int.lastNDigits(digits: Int): Int {
 
 fun Long.firstDigit(): Int {
     return (this / this.clampToPowTen()).toInt()
+}
+
+fun Long.lastDigit(): Long {
+    return this % 10
 }
 
 fun Long.firstNDigits(digits: Int): Long {
