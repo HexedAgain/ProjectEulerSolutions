@@ -2,6 +2,7 @@ package extensions
 
 import kotlin.math.log10
 import kotlin.math.pow
+import kotlin.math.sqrt
 
 fun Int.isEven(): Boolean {
     return this % 2 == 0

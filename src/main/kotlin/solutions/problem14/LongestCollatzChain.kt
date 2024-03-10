@@ -17,6 +17,7 @@ class LongestCollatzChain: OneArgSolution<Long, MaxChain> {
 
     private val knownChainLengths = mutableMapOf(1L to 4L, 2L to 2L)
     private val chain = mutableListOf<Long>()
+    // FIXME I probably need a no-arg version of this
     override fun solve(max: Long): MaxChain {
         if (max <= 0L) return MaxChain(0, 0)
         (1..max).forEach {

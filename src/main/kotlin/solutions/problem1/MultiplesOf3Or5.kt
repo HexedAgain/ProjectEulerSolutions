@@ -16,7 +16,7 @@ class MultiplesOf3Or5: NoArgSolution<Int> {
     }
 
 
-    fun multiplesUpToN(max: Int): Int {
+    internal fun multiplesUpToN(max: Int): Int {
         if (max < 2) return 0
         return sum(3, max) + sum(5, max) - sum(15, max)
     }

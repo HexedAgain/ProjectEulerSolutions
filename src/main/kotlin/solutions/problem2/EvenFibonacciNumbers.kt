@@ -13,11 +13,10 @@ class EvenFibonacciNumbers: NoArgSolution<Int> {
     override val problemName = "Even Fibonacci numbers"
 
     override fun solve(): Int {
-        //return fibLinear(4_000_000)
         return sumFibRecursive(4_000_000)
     }
 
-    fun fibLinear(upperBound: Int): Int {
+    internal fun fibLinear(upperBound: Int): Int {
         var f1 = 0
         var f2 = 1
         var f3 = 0
@@ -31,7 +30,7 @@ class EvenFibonacciNumbers: NoArgSolution<Int> {
         return sum
     }
 
-    fun sumFibRecursive(upperBound: Int): Int {
+    internal fun sumFibRecursive(upperBound: Int): Int {
         var sum = 0
         var numTerms = 0
         while (true) {

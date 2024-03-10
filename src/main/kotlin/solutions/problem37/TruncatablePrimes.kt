@@ -26,7 +26,7 @@ class TruncatablePrimes(
         return getBothWayTruncatablePrimes().sum()
     }
 
-    fun getBothWayTruncatablePrimes(): List<Int> {
+    internal fun getBothWayTruncatablePrimes(): List<Int> {
         if (primesUpto < 23) return listOf()
         candidatePrimes = (23..99).filter { primeChecker.checkPrime(it) && isLeftTruncatable(it) }.toMutableList()
         (3..log10(primesUpto.toDouble()).toInt()).forEach {
