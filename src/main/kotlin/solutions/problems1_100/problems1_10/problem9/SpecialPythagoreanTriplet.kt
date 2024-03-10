@@ -21,6 +21,11 @@ class SpecialPythagoreanTriplet: NoArgSolution<Int> {
         There are some ways to generate pythagorean triplets - wikipedia says that starting from 5, every 2nd one is the
         largest side of such a triangle, and so we can try to fix one of the sides at (5, 13, 34, 89, ...), we can also
         try multiples of these
+        Formula to exploit here is (F_nF_(n+3))^2 + (2F_(n+1)F_(n+2))^2 = F_(2n+3)^2
+        So for example if we take 5th Fibonacci number (5), then
+            c = 5, a = F_1F_4 = 1*3 = 3, b = 2F_2F_3 = 2*1*2  = 4
+        if we take 7th Fibonacci number (13), then
+            c = 13, a = F_2F_5 = 1*5 = 3, b = 2F_3F_4 = 2*2*3 = 12
     """.trimIndent()
 
     override fun solve(): Int {
