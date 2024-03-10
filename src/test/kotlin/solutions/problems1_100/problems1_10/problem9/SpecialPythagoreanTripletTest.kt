@@ -6,7 +6,8 @@ import utils.numbers.fib
 
 class SpecialPythagoreanTripletTest {
     @Test
-    fun `some test`() {
+    fun `solve, it finds the correct answer`() {
+        // Nothing really much to test. This was found by analysis and so solve just multiplies 3 numbers
         assertEquals(31875000, SpecialPythagoreanTriplet().solve())
     }
 }
