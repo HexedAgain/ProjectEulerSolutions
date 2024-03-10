@@ -1,6 +1,7 @@
 package solutions.problems1_100.problems1_10.problem5
 
 import extensions.divides
+import extensions.lPow
 import solutions.NoArgSolution
 import utils.numbers.factorise
 import utils.numbers.lSqrt
@@ -11,12 +12,12 @@ import kotlin.math.pow
     2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
     What is the smallest positive number that is evenly divisible (i.e. no reminder) by all of the numbers from 1 to 20?
  */
-class SmallestMultiple: NoArgSolution<Int> {
+class SmallestMultiple: NoArgSolution<Long> {
     override val problemNumber = 5
     override val problemName = "Smallest Multiple"
 
-    override fun solve(): Int {
-        return 0
+    override fun solve(): Long {
+        return smallestMultiple(numbersUpTo = 20L)
     }
     lateinit var primes: List<Long>
 
@@ -24,8 +25,9 @@ class SmallestMultiple: NoArgSolution<Int> {
         if (!::primes.isInitialized) {
             primes = PrimeSieve(maxPrime = lSqrt(numbersUpTo)).sieve()
         }
-        val divisors = getDivisorPowers(numbersUpTo)
-        return getPrimePowers(divisors).reduce { acc, v -> v * acc }
+        return getDivisorPowers(numbersUpTo = numbersUpTo)
+            .map { it.key.lPow(it.value) }
+            .reduce { acc, v -> v * acc }
     }
 
     private fun getDivisorPowers(numbersUpTo: Long): Map<Long, Long> {
@@ -42,9 +44,5 @@ class SmallestMultiple: NoArgSolution<Int> {
             }
         }
         return divisors
-    }
-
-    private fun getPrimePowers(divisors: Map<Long, Long>): List<Long> {
-        return divisors.map { it.key.toDouble().pow(it.value.toDouble()).toLong() }
     }
 }

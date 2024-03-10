@@ -9,7 +9,7 @@ class SmallestMultipleTest {
         assertEquals(2520, SmallestMultiple().smallestMultiple(numbersUpTo = 10))
     }
     @Test
-    fun `solve, for numbers up to 20 it finds the expected answer of`() {
-        assertEquals(232792560, SmallestMultiple().smallestMultiple(numbersUpTo = 20))
+    fun `solve, for numbers up to 20 it finds the expected answer of 232792560`() {
+        assertEquals(232792560, SmallestMultiple().solve())
     }
 }

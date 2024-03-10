@@ -2,7 +2,6 @@ package extensions
 
 import kotlin.math.log10
 import kotlin.math.pow
-import kotlin.math.sqrt
 
 fun Int.isEven(): Boolean {
     return this % 2 == 0
@@ -80,4 +79,20 @@ infix fun Int.divides(rhs: Int): Boolean {
 }
 infix fun Long.divides(rhs: Long): Boolean {
     return ((rhs / this) * this == rhs)
+}
+
+fun Int.iPow(exponent: Int): Int {
+    return this.toDouble().pow(exponent).toInt()
+}
+
+fun Int.iPow(exponent: Long): Int {
+    return this.toDouble().pow(exponent.toInt()).toInt()
+}
+
+fun Long.lPow(exponent: Int): Long {
+    return this.toDouble().pow(exponent).toLong()
+}
+
+fun Long.lPow(exponent: Long): Long {
+    return this.toDouble().pow(exponent.toInt()).toLong()
 }
