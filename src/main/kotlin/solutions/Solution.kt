@@ -1,6 +1,14 @@
 package solutions
 
-interface Solution<In, Out> {
+import utils.io.FileUtils
+
+interface BaseSolution {
+    fun loadResourceFile(filename: String): List<String> {
+        return FileUtils().loadResourceFile(this, filename)
+    }
+}
+
+interface Solution<In, Out>: BaseSolution {
     val problemNumber: Int
     val problemName: String
     val problemNotes: String
