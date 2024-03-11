@@ -3,7 +3,7 @@ package solutions.problems1_100.problems11_20.problem11
 import solutions.NoArgSolution
 import kotlin.math.max
 
-class LargestProductInAGrid: NoArgSolution<Int> {
+class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
     override val problemNumber = 11
     override val problemName = "Largest Product In A Grid"
     override val problemNotes = """
@@ -14,8 +14,12 @@ class LargestProductInAGrid: NoArgSolution<Int> {
         above we just reverse the roles)
         For diagonal we have two directions: / and \. Here we are going to be holding row + col constant. I.e. if we're
         scanning the 5th diagonal / from top left then we will visit (4, 0), (3, 1), (2, 2), (1, 3), (0, 4)
+        
+        It is convenient to reduce 4 directions down to 2 directions by transposing the grid in 2 of these cases.
+        Bit of a performance hit, but doing that we solve a single horizontal problem, and a single diagonal problem
     """.trimIndent()
 
+    private var largestProduct = 0
     override fun solve(): Int {
         return 0
     }
@@ -27,24 +31,31 @@ class LargestProductInAGrid: NoArgSolution<Int> {
         return 0
     }
 
-    internal fun scanHorizontal(grid: List<List<Int>>, numAdjacent: Int): Int {
-        var largestProduct = 0
-        grid.forEach { row ->
+    private fun transposeGrid(grid: List<List<Int>>): List<List<Int>> {
+        val newGrid = mutableListOf<List<Int>>()
+        (0 until grid.first().size).map { col ->
+            newGrid.add(grid.indices.map { row -> grid[row][col] })
+        }
+        return newGrid
+    }
+
+    internal fun scanHorizontal(grid: List<List<Int>>): Int {
+        (0 until grid.size).forEach { row ->
             var product = 1
             var divideSkips = numAdjacent
-            row.indices.forEach { col ->
+            (0 until grid.first().size).forEach { col ->
                 when {
-                    row[col] == 0 -> {
+                    grid[row][col] == 0 -> {
                         product = 1
                         divideSkips = numAdjacent
                     }
                     divideSkips > 0 -> {
-                        product *= row[col]
+                        product *= grid[row][col]
                         divideSkips--
                     }
                     else -> {
-                        product /= row[col - numAdjacent]
-                        product *= row[col]
+                        product /= grid[row][col - numAdjacent]
+                        product *= grid[row][col]
                         largestProduct = max(product, largestProduct)
                     }
                 }
@@ -52,15 +63,16 @@ class LargestProductInAGrid: NoArgSolution<Int> {
         }
         return largestProduct
     }
-    private fun scanVertical(grid: List<List<Int>>, numAdjacent: Int): Int {
-        var largestProduct = 0
-        grid.forEach { row ->
-            var product = 1
-            var divideSkips = numAdjacent
-        }
 
+    internal fun scanNorthWest(grid: List<List<Int>>): Int {
         return 0
     }
+
+    internal fun scanVertical(grid: List<List<Int>>): Int {
+        val transposed = transposeGrid(grid)
+        return scanHorizontal(transposed)
+    }
+
     private fun scanDiagonal(grid: List<List<Int>>, numAdjacent: Int): Int {
         return 0
     }
