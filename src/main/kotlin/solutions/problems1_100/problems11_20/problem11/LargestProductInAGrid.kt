@@ -2,6 +2,7 @@ package solutions.problems1_100.problems11_20.problem11
 
 import solutions.NoArgSolution
 import kotlin.math.max
+import kotlin.math.min
 
 class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
     override val problemNumber = 11
@@ -65,6 +66,14 @@ class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
     }
 
     internal fun scanNorthWest(grid: List<List<Int>>): Int {
+        (0 until (2 * grid.size - 1)).forEach { longRow ->
+            val rowColSum = longRow
+            val row = min(rowColSum, grid.size - 1)
+            (0 .. (2 * row - rowColSum)).forEach { col ->
+                val minCol = rowColSum - row
+                println("(${row - col}, ${col + minCol})")
+            }
+        }
         return 0
     }
 
