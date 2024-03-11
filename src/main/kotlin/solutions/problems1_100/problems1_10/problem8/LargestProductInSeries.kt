@@ -15,13 +15,15 @@ class LargestProductInSeries: NoArgSolution<Long> {
         update the largest found product, move a character to the right and consume the next 13 characters, and so on...
         As an optimisation, if we ever find a zero then we can jump ahead to start scanning immediately after it (as any
         such product will contain a zero)
+        Note: performance here could be improved by not recalculating product as we go along, instead as we move a digit
+        to the right then divide by digit at the left, and then multiply by digit on the right (take care with division by zero though!)
     """.trimIndent()
 
     override fun solve(): Long {
-        return findAdjacentProduct(numAdjacent = 13)
+        return findMaxAdjacentProduct(numAdjacent = 13)
     }
 
-    fun findAdjacentProduct(numAdjacent: Int): Long {
+    fun findMaxAdjacentProduct(numAdjacent: Int): Long {
         val numbers = loadResourceFile(filename = "problem8.txt")
             .joinToString("")
             .map { Integer.parseInt(it.toString()).toLong() }
