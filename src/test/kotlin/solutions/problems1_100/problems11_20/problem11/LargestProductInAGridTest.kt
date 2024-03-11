@@ -34,13 +34,18 @@ class LargestProductInAGridTest {
     }
 
     @Test
-    fun `scanNorthWest does something nice`() {
+    fun `scanNorthWest, for all columns in real grid and numAdjacent 4, it finds 87 x 97 x 94 x 89`() {
         val grid = grid
-        assertEquals(51267216, LargestProductInAGrid(numAdjacent = 4).scanNorthWest(grid = grid))
+        assertEquals(70600674, LargestProductInAGrid(numAdjacent = 4).scanNorthWest(grid = grid))
+    }
+    @Test
+    fun `scanNorthEast, for all columns in real grid and numAdjacent 4, it finds 49 x 95 x 71 x 99`() {
+        val grid = grid
+        assertEquals(32719995, LargestProductInAGrid(numAdjacent = 4).scanNorthEast(grid = grid))
     }
 
     @Test
-    fun `findMaxAdjacentProduct, if numAdjacent is 2, it finds 99 times 94 (on the diagonal)`() {
-        assertEquals(99 * 94, LargestProductInAGrid(numAdjacent = 4).findMaxAdjacentProduct(numAdjacent = 2))
+    fun `solve, if finds expected answer on northwest diagonal`() {
+        assertEquals(70600674, LargestProductInAGrid(numAdjacent = 4).solve())
     }
 }

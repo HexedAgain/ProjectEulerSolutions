@@ -8,34 +8,35 @@ class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
     override val problemNumber = 11
     override val problemName = "Largest Product In A Grid"
     override val problemNotes = """
-        This one is similar to problem 8, albeit the search is now horizontal, vertical, and diagonal. It does not wrap
-        around like 8 though so we should just to maintain an array of arrays of ints
-        For horizontal, looping through each row, we hold the row index and scan the columns like we did in problem 8
-        For vertical, looping through each column, we hold the column index and scan the rows (so if index was i, j
-        above we just reverse the roles)
-        For diagonal we have two directions: / and \. Here we are going to be holding row + col constant. I.e. if we're
-        scanning the 5th diagonal / from top left then we will visit (4, 0), (3, 1), (2, 2), (1, 3), (0, 4)
+        This one "looks" similar to problem 8, albeit the search is now horizontal, vertical, and diagonal. It does not
+        wraparound like 8 though so we should just to maintain an array of arrays of ints
         
-        It is convenient to reduce 4 directions down to 2 directions by transposing the grid in 2 of these cases.
+        It is convenient to reduce 4 directions down to 2 directions by "rotating" the grid in 2 of these cases.
         Bit of a performance hit, but doing that we solve a single horizontal problem, and a single diagonal problem
+        There is a single algorithm serving both of these cases but it gets fiddly with indices ... this one was a 
+        bit of a debug-fest to get right :(
     """.trimIndent()
 
     private var largestProduct = 0
     override fun solve(): Int {
-        return 0
-    }
-
-    internal fun findMaxAdjacentProduct(numAdjacent: Int): Int {
         val grid = loadResourceFile(filename = "problem11.txt")
             .map { row -> row.split(" ").map { Integer.parseInt(it) } }
-        var largestProduct = 0
-        return 0
+
+        scanHorizontal(grid)
+        scanVertical(grid)
+        scanNorthWest(grid)
+        scanNorthEast(grid)
+
+        return largestProduct
     }
 
-    private fun transposeGrid(grid: List<List<Int>>): List<List<Int>> {
+    private fun rotateGrid(grid: List<List<Int>>): List<List<Int>> {
         val newGrid = mutableListOf<List<Int>>()
         (0 until grid.first().size).map { col ->
-            newGrid.add(grid.indices.map { row -> grid[row][col] })
+            newGrid.add(grid.indices.map { row -> grid[row][grid.first().size - 1 - col] })
+        }
+        newGrid.forEach {
+            println(it)
         }
         return newGrid
     }
@@ -45,21 +46,9 @@ class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
             var product = 1
             var divideSkips = numAdjacent
             (0 until grid.first().size).forEach { col ->
-                when {
-                    grid[row][col] == 0 -> {
-                        product = 1
-                        divideSkips = numAdjacent
-                    }
-                    divideSkips > 0 -> {
-                        product *= grid[row][col]
-                        divideSkips--
-                    }
-                    else -> {
-                        product /= grid[row][col - numAdjacent]
-                        product *= grid[row][col]
-                        largestProduct = max(product, largestProduct)
-                    }
-                }
+                val result = innerAlgorithm(grid, row, col, product, divideSkips, false)
+                product = result.first
+                divideSkips = result.second
             }
         }
         return largestProduct
@@ -67,32 +56,56 @@ class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
 
     internal fun scanNorthWest(grid: List<List<Int>>): Int {
         (0 until (2 * grid.size - 1)).forEach { longRow ->
-            val rowColSum = longRow
-            val row = min(rowColSum, grid.size - 1)
-            (0 .. (2 * row - rowColSum)).forEach { col ->
-                val minCol = rowColSum - row
-                println("(${row - col}, ${col + minCol})")
+            var product = 1
+            var divideSkips = numAdjacent
+            val row = min(longRow, grid.size - 1)
+            (0..(2 * row - longRow)).forEach { col ->
+                val minCol = longRow - row
+                val result = innerAlgorithm(grid, row - col, col + minCol, product, divideSkips, true)
+                product = result.first
+                divideSkips = result.second
             }
         }
-        return 0
+        return largestProduct
     }
 
     internal fun scanVertical(grid: List<List<Int>>): Int {
-        val transposed = transposeGrid(grid)
+        val transposed = rotateGrid(grid)
         return scanHorizontal(transposed)
     }
 
-    private fun scanDiagonal(grid: List<List<Int>>, numAdjacent: Int): Int {
-        return 0
+    internal fun scanNorthEast(grid: List<List<Int>>): Int {
+        val transposed = rotateGrid(grid)
+        return scanNorthWest(transposed)
     }
-//    var product = 0
-//    while (product == 0 && i + numAdjacent < row.size) {
-//        product = row.take(numAdjacent).reduce { acc, i -> i * acc }
-//        i += 1
-//    }
-//    largestProduct = max(product, largestProduct)
-//    (i until row.size - numAdjacent).forEach {
-//        product = (product / row[it]) * row[it + numAdjacent]
-//        largestProduct = max(product, largestProduct)
-//    }
+
+    private fun innerAlgorithm(
+        grid: List<List<Int>>,
+        row: Int,
+        col: Int,
+        product: Int,
+        divideSkips: Int,
+        isDiagonal: Boolean
+    ): Pair<Int, Int> {
+        var newProduct = product
+        var newDivideSkips = divideSkips
+        when {
+            grid[row][col] == 0 -> {
+                newProduct = 1
+                newDivideSkips = numAdjacent
+            }
+            newDivideSkips > 0 -> {
+                newProduct *= grid[row][col]
+                newDivideSkips--
+            }
+            else -> {
+                val prevRow = row + if (isDiagonal) numAdjacent else 0
+                val prevCol = col - numAdjacent
+                newProduct /= grid[prevRow][prevCol]
+                newProduct *= grid[row][col]
+                largestProduct = max(product, largestProduct)
+            }
+        }
+        return Pair(newProduct, newDivideSkips)
+    }
 }
