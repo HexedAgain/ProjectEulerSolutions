@@ -46,3 +46,10 @@ private fun fibTailRecursive(f1: Int, f2: Int, numTerms: Int): Int {
         else -> fibTailRecursive(f2, f1 + f2, numTerms - 1)
     }
 }
+
+/**
+ * Finds the sum of n terms with common difference d, starting at a
+ */
+fun sum(n: Int, a: Int = 1, d: Int = 1): Int {
+    return n * ((2 * a) + ((n - 1) * d)) / 2
+}

@@ -34,8 +34,8 @@ class MultiplesOf3Or5: NoArgSolution<Int> {
         return sum
     }
 
-    private fun sum(n: Int, max: Int): Int {
-        val numTerms = floor(max.toDouble() / n)
-        return n * (numTerms * (numTerms + 1) / 2).toInt()
+    private fun sum(d: Int, max: Int): Int {
+        val numTerms = floor(max.toDouble() / d).toInt()
+        return utils.numbers.sum(n = numTerms, a = d, d = d)
     }
 }

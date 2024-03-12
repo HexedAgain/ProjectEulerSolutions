@@ -21,11 +21,16 @@ class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
     override fun solve(): Int {
         val grid = loadResourceFile(filename = "problem11.txt")
             .map { row -> row.split(" ").map { Integer.parseInt(it) } }
+        val rotatedGrid = rotateGrid(grid)
 
+//        scanHorizontal(grid)
+//        scanVertical(grid)
+//        scanNorthWest(grid)
+//        scanNorthEast(grid)
         scanHorizontal(grid)
-        scanVertical(grid)
         scanNorthWest(grid)
-        scanNorthEast(grid)
+        scanHorizontal(rotatedGrid)
+        scanNorthWest(rotatedGrid)
 
         return largestProduct
     }
@@ -79,6 +84,7 @@ class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
         return scanNorthWest(transposed)
     }
 
+    // Can probably just sack all this off and multiply ...
     private fun innerAlgorithm(
         grid: List<List<Int>>,
         row: Int,
@@ -89,20 +95,21 @@ class LargestProductInAGrid(private val numAdjacent: Int): NoArgSolution<Int> {
     ): Pair<Int, Int> {
         var newProduct = product
         var newDivideSkips = divideSkips
+        val thisItem = grid[row][col]
         when {
-            grid[row][col] == 0 -> {
+            thisItem == 0 -> {
                 newProduct = 1
                 newDivideSkips = numAdjacent
             }
             newDivideSkips > 0 -> {
-                newProduct *= grid[row][col]
+                newProduct *= thisItem
                 newDivideSkips--
             }
             else -> {
                 val prevRow = row + if (isDiagonal) numAdjacent else 0
                 val prevCol = col - numAdjacent
                 newProduct /= grid[prevRow][prevCol]
-                newProduct *= grid[row][col]
+                newProduct *= thisItem
                 largestProduct = max(product, largestProduct)
             }
         }
