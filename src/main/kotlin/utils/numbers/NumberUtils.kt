@@ -1,6 +1,7 @@
 package utils.numbers
 
 import extensions.divides
+import extensions.lPow
 import utils.primes.PrimeSieve
 import kotlin.math.sqrt
 
@@ -36,6 +37,25 @@ fun factorise(n: Long, primes: List<Long>): Map<Long, Long> {
     }
 }
 
+fun divisors(n: Long): List<Long> {
+    fun recursiveDivisors(primePowers: List<List<Long>>): List<Long> {
+        if (primePowers.size == 1) return primePowers.first()
+        val (first, second) = primePowers.take(2)
+        val rest = primePowers.drop(2)
+        val products = first + first.map { f -> second.map { s -> f * s } }.flatten()
+        return recursiveDivisors(listOf(products) + rest)
+    }
+
+    val factors = factorise(n)
+    val distinctPrimePowers = factors
+        .toMutableMap()
+        .map { entry ->
+            val lhs = if (entry == factors.entries.first()) 0 else 1
+            (lhs..entry.value).map { entry.key.lPow(it) }
+        }
+    return recursiveDivisors(distinctPrimePowers)
+}
+
 fun fib(numTerms: Int): Int {
     return fibTailRecursive(0, 1, numTerms)
 }
@@ -48,7 +68,8 @@ private fun fibTailRecursive(f1: Int, f2: Int, numTerms: Int): Int {
 }
 
 /**
- * Finds the sum of n terms with common difference d, starting at a
+ * Finds the sum of n terms with common difference d, starting at a.
+ * Passing only n returns sum of the first n numbers
  */
 fun sum(n: Int, a: Int = 1, d: Int = 1): Int {
     return n * ((2 * a) + ((n - 1) * d)) / 2

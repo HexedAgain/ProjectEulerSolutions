@@ -2,6 +2,7 @@ package utils.numbers
 
 import org.junit.Assert
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class NumberUtilsTest {
     @Test
@@ -32,5 +33,20 @@ class NumberUtilsTest {
     fun `factorise, it factorises product of two distant primes correctly`() {
         Assert.assertEquals(mutableMapOf(13L to 1L, 9973L to 1L), factorise(129649))
         Assert.assertEquals(mutableMapOf(13L to 3L, 9973L to 2L), factorise(218515221613))
+    }
+
+    @Test
+    fun `sum, write some tests here`() {
+        assertEquals(true, false)
+    }
+
+    @Test
+    fun `divisors, write some tests here`() {
+        assertEquals(true, false)
+    }
+
+    @Test
+    fun `fib, write some tests here`() {
+        assertEquals(true, false)
     }
 }
