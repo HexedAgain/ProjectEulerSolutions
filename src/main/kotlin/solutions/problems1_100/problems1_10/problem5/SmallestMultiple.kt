@@ -1,12 +1,10 @@
 package solutions.problems1_100.problems1_10.problem5
 
-import extensions.divides
 import extensions.lPow
 import solutions.NoArgSolution
 import utils.numbers.factorise
 import utils.numbers.lSqrt
 import utils.primes.PrimeSieve
-import kotlin.math.pow
 
 /*
     2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.

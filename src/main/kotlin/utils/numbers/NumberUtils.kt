@@ -48,12 +48,12 @@ fun divisors(n: Long): List<Long> {
     }
 
     val factors = factorise(n)
-    val distinctPrimePowers = factors
-        .map { entry ->
-            val lhs = if (entry == factors.entries.first()) 0 else 1
-            (lhs..entry.value).map { entry.key.lPow(it) }
-        }
+    val distinctPrimePowers = factors.map { entry -> (1..entry.value).map { entry.key.lPow(it) } }
     return recursiveDivisors(distinctPrimePowers)
+}
+
+fun numDivisors(n: Long): Long {
+    return factorise(n).values.reduce { acc, m -> + (m + 1) * acc }
 }
 
 fun fib(term: Int): Int {
@@ -75,4 +75,12 @@ fun fib(term: Int): Int {
  */
 fun sum(n: Int, a: Int = 1, d: Int = 1): Int {
     return n * ((2 * a) + ((n - 1) * d)) / 2
+}
+
+fun realQuadraticRoots(a: Double, b: Double, c: Double): Pair<Double?, Double?> {
+    val sqrtDiscriminant = ((b * b - 4 * a * c) / (4 * a * a)).takeIf { it >= 0 }
+        ?.let { sqrt(it) }
+        ?: return Pair(null, null)
+
+    return Pair(-b/(2*a) + sqrtDiscriminant, -b/(2*a) - sqrtDiscriminant)
 }
