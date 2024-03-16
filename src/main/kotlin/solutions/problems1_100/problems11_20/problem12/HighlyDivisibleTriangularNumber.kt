@@ -55,7 +55,7 @@ class HighlyDivisibleTriangularNumber: NoArgSolution<Triple<Int, Int, Long>> {
         }
     }
 
-    internal fun smallestTriangular2(leastN: Int = 1, numDivisorsRequired: Int): Triple<Int, Int, Long> {
+    internal fun smallestTriangular2(numDivisorsRequired: Int): Triple<Int, Int, Long> {
         val primes = PrimeSieve(maxPrime = iSqrt(Int.MAX_VALUE).toLong()).sieve()
         return Triple(0, 0, 1L)
     }
