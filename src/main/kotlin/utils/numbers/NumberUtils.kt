@@ -56,6 +56,10 @@ fun numDivisors(n: Long): Long {
     return factorise(n).values.reduce { acc, m -> + (m + 1) * acc }
 }
 
+fun numDivisors(n: Long, primes: List<Long>): Long {
+    return factorise(n, primes).values.reduce { acc, m -> + (m + 1) * acc }
+}
+
 fun fib(term: Int): Int {
     fun fibTailRecursive(f1: Int, f2: Int, term: Int): Int {
         return when (term) {

@@ -40,15 +40,19 @@ class HighlyDivisibleTriangularNumber: NoArgSolution<Triple<Int, Int, Long>> {
         i.e. 6, 10, ., ., 28, 36, ., ., 66, 78, ... i.e. n = 4m or 4m-1
     """.trimIndent()
 
+    private val primes = PrimeSieve(maxPrime = iSqrt(Short.MAX_VALUE.toInt()).toLong()).sieve()
+    private val primesSet = primes.toHashSet()
+
     override fun solve(): Triple<Int, Int, Long> {
-        return smallestTriangular(5883, 500)
+        return smallestTriangular(5883, 500, true)
     }
 
-    internal fun smallestTriangular(leastN: Int = 1, numDivisorsRequired: Int): Triple<Int, Int, Long> {
+    internal fun smallestTriangular(leastN: Int = 1, numDivisorsRequired: Int, ignorePrimes: Boolean = false): Triple<Int, Int, Long> {
         var n = leastN
         while (true) {
+            if (ignorePrimes && primesSet.contains(n.toLong())) continue
             val sum = sum(n++).toLong()
-            val numDivisors = numDivisors(sum).toInt()
+            val numDivisors = numDivisors(sum, primes).toInt()
             if (numDivisors > numDivisorsRequired) {
                 return Triple(n-1, numDivisors, sum)
             }
