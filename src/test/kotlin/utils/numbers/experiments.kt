@@ -1,7 +1,10 @@
 package utils.numbers
 
 import org.junit.Test
+import utils.bits.msb
+import utils.bits.nToBits
 import utils.primes.PrimeSieve
+import kotlin.test.assertEquals
 
 class Experiments {
     @Test
@@ -60,5 +63,29 @@ class Experiments {
         // 1: [(1)] -> [1]
         // 2: [(3 + 1), (2*3 + 0), (0, 2)] -> [4, 6, 2]
         // 3: [(4*4+4+1), (2*4*4+4+0), (4*4+2*4+0), (2*4*4+0+1), (4*4+0+2), (3*4*4+0+0), (0+2*4+1), (0+4+2), (0+3*4+0), (0+0+3)] -> [21, 36, 24, 33, 18, 48, 9, 6, 12, 3]
+    }
+
+    @Test
+    fun `splitN, given n is 1 it returns ((1))`() {
+        val expected = listOf(listOf(1))
+        assertEquals(expected, splitN(1))
+    }
+
+    @Test
+    fun `splitN, given n is 2 it returns ((1,1),(2,0),(0,2))`() {
+        val expected = listOf(listOf(1,1), listOf(2,0), listOf(0,2))
+        val bits = nToBits(7)
+        val msb = msb(11)
+        splitN(70)
+        assertEquals(expected, splitN(2))
+    }
+
+    fun splitN(n: Int): List<List<Int>> {
+        (1..n).forEach {
+            val parts = nToBits(it)
+            val msb = parts.size
+            var allocation = it
+        }
+        return listOf()
     }
 }
