@@ -13,7 +13,7 @@ import solutions.NoArgSolution
  */
 class LatticePaths: NoArgSolution<Long> {
     override fun solve(): Long {
-        return 0L
+        return findPaths(20, 20)
     }
 
     override val problemNumber = 15
@@ -30,6 +30,15 @@ class LatticePaths: NoArgSolution<Long> {
         is Sum(1 + N, N, 1-N, ... 1) = (N+1)(N+2)/2
         In general M x N can be computed so long as we have previously computed (M-1)x(N-a) for a in (N-1..0).
         There for a reasonably efficient solution would be to systematically construct a map of solutions for each row
+        
+        This could (as per problem overview after solving), be done by combinatorics. For the 2 by 2 case,
+        denoting right by R, and down by D, we have strings: RRDD, RDRD, RDDR, DRRD, DRDR, DDRR, and so the question is
+        how many ways are there of picking 2 Rs out of 4? by pascals triangle we have 1 4 6 4 6 and moreover, the general formula
+        is given by Choose(4 2) = 4!/2!(4-2)! = 24 / (2*2) = 6
+        For the 20 x 20 case we want 20! / 10!(20 - 10)! which can be written as
+                      40 x 39 x ... x 3 x 2 x 1                 40 x 39 x ... x 21      ---  20 + i
+            ---------------------------------------------  =  ----------------------  = | | --------
+            20 x 19 x ... x 2 x 1 x 20 x 19 x ... x 2 x 1      20 x 19 x ... x 2 x 1    | |     i
     """.trimIndent()
 
     private val rowCols = MutableList(size = 21) { MutableList(size = 21) { 0L } }
@@ -41,5 +50,10 @@ class LatticePaths: NoArgSolution<Long> {
             }
         }
         return rowCols[numRows][numColumns]
+    }
+
+    fun findPathsSquareCombinatoric(numRows: Int): Long {
+        val terms = (1..numRows).map { ((numRows + it).toDouble() / it.toDouble()) }
+        return (terms.reduce { acc, l -> l * acc } + 0.5).toLong() // 0.5 here to account for double error
     }
 }

@@ -22,6 +22,18 @@ class LatticePathsTest {
     }
     @Test
     fun `solve, it finds 137846528820 paths on a grid of 20 rows and 20 columns`() {
-        assertEquals(137846528820, LatticePaths().findPaths(numRows = 20, numColumns = 20))
+        assertEquals(137846528820, LatticePaths().solve())
+    }
+    @Test
+    fun `findPathsSquareCombinatoric, it finds 6 paths on a grid of 2 rows and 2 columns`() {
+        assertEquals(6, LatticePaths().findPathsSquareCombinatoric(numRows = 2))
+    }
+    @Test
+    fun `findPathsSquareCombinatoric, it finds 20 paths on a grid of 3 rows and 3 columns`() {
+        assertEquals(20, LatticePaths().findPathsSquareCombinatoric(numRows = 3))
+    }
+    @Test
+    fun `findPathsSquareCombinatoric, it finds 137846528820 paths on a grid of 20 rows and 20 columns`() {
+        assertEquals(137846528820, LatticePaths().findPathsSquareCombinatoric(numRows = 20))
     }
 }
