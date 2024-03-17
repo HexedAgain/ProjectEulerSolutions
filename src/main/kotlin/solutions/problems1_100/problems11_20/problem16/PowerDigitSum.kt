@@ -16,6 +16,8 @@ class PowerDigitSum: NoArgSolution<Int> {
         If we knew 2^500 we would square it to get 2^1000, so if we knew 2^125 we could square 3 times to get 2^1000
         We can get 2^125 by (2^25)^5. Computing these I guess could be done manually but is error prone
         Haven't spotted any pattern to exploit in: 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384,...
+        
+        Feels like a bit of a cheat to use BigInt :(
     """.trimIndent()
 
     override fun solve(): Int {
