@@ -3,6 +3,7 @@ package utils.numbers
 import org.junit.Assert
 import org.junit.Test
 import utils.primes.PrimeSieve
+import java.math.BigInteger
 import kotlin.test.assertEquals
 
 class NumberUtilsTest {
@@ -116,5 +117,26 @@ class NumberUtilsTest {
         // (n^2 + n + 1) - 17297280 = 0
         assertEquals(Pair(3.0, -2.0), realQuadraticRoots(1.0, 1.0, (17297280 * 2).toDouble()))
         val x = 4
+    }
+
+    @Test
+    fun `factorial, it finds factorial of first 5 numbers correctly`() {
+        assertEquals(1, factorial(1))
+        assertEquals(2, factorial(2))
+        assertEquals(6, factorial(3))
+        assertEquals(24, factorial(4))
+        assertEquals(120, factorial(5))
+    }
+    @Test
+    fun `bigFactorial, it finds factorial of first 5 numbers correctly`() {
+        assertEquals(BigInteger.valueOf(1), bigFactorial(1))
+        assertEquals(BigInteger.valueOf(2), bigFactorial(2))
+        assertEquals(BigInteger.valueOf(6), bigFactorial(3))
+        assertEquals(BigInteger.valueOf(24), bigFactorial(4))
+        assertEquals(BigInteger.valueOf(120), bigFactorial(5))
+    }
+    @Test
+    fun `bigFactorial, it finds factorial of 100 correctly`() {
+        assertEquals(BigInteger("93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000"), bigFactorial(100))
     }
 }

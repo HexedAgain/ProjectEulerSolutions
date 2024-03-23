@@ -3,6 +3,7 @@ package utils.numbers
 import extensions.divides
 import extensions.lPow
 import utils.primes.PrimeSieve
+import java.math.BigInteger
 import kotlin.math.sqrt
 
 fun iSqrt(n: Int): Int {
@@ -87,4 +88,24 @@ fun realQuadraticRoots(a: Double, b: Double, c: Double): Pair<Double?, Double?> 
         ?: return Pair(null, null)
 
     return Pair(-b/(2*a) + sqrtDiscriminant, -b/(2*a) - sqrtDiscriminant)
+}
+
+fun factorial(n: Int): Int = factorial(n.toLong()).toInt()
+fun factorial(n: Long): Long {
+    fun _factorial(n: Long): Long {
+        return when (n) {
+            1L -> 1
+            else -> n * _factorial(n - 1)
+        }
+    }
+    return _factorial(n)
+}
+fun bigFactorial(n: Long): BigInteger {
+    fun _bigFactorial(n: Long, curr: BigInteger): BigInteger {
+        return when (n) {
+            1L -> curr
+            else -> _bigFactorial(n - 1, BigInteger.valueOf(n) * curr)
+        }
+    }
+    return _bigFactorial(n, BigInteger.ONE)
 }

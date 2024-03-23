@@ -55,7 +55,7 @@ class CountingSundays: NoArgSolution<Int> {
                 Month.FEB -> if (isLeapYear(year)) 29 else 28
                 else -> month.days
             }
-            currDay = days[(currDay.ordinal + (daysInMonth % 28)) % 7]
+            currDay = days[(currDay.ordinal + daysInMonth) % 7]
             if (currDay == Day.SUN) sundays++
         }
 
