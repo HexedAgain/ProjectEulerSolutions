@@ -59,6 +59,10 @@ class NumberUtilsTest {
     fun `divisors, it finds the divisors of 2 x 2 x 3 x 3 to be (1, 2, 3, 4, 6, 9, 12, 18, 36)`() {
         assertEquals(listOf(1L, 2L, 3L, 4L, 6L, 9L, 12L, 18L, 36L), divisors(36L).sorted())
     }
+    @Test
+    fun `divisors, it finds the proper divisors of 2 x 2 x 3 x 3 to be (1, 2, 3, 4, 6, 9, 12, 18)`() {
+        assertEquals(listOf(1L, 2L, 3L, 4L, 6L, 9L, 12L, 18L), divisors(36L, properDivisors = true).sorted())
+    }
 
     @Test
     fun `fib, it calculates the first 10 fibonacci numbers correctly`() {
@@ -111,12 +115,6 @@ class NumberUtilsTest {
     @Test
     fun `realQuadraticRoots, it finds roots of (x-3)(2x+4) to be (3, -2)`() {
         assertEquals(Pair(3.0, -2.0), realQuadraticRoots(2.0, -2.0, -12.0))
-    }
-    @Test
-    fun `realQuadraticRoots, it finds `() {
-        // (n^2 + n + 1) - 17297280 = 0
-        assertEquals(Pair(3.0, -2.0), realQuadraticRoots(1.0, 1.0, (17297280 * 2).toDouble()))
-        val x = 4
     }
 
     @Test

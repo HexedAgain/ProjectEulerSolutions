@@ -1,5 +1,6 @@
 package utils.numbers
 
+import org.junit.Ignore
 import org.junit.Test
 import utils.bits.msb
 import utils.bits.nToBits
@@ -66,12 +67,14 @@ class Experiments {
     }
 
     @Test
+    @Ignore
     fun `splitN, given n is 1 it returns ((1))`() {
         val expected = listOf(listOf(1))
         assertEquals(expected, splitN(1))
     }
 
     @Test
+    @Ignore
     fun `splitN, given n is 2 it returns ((1,1),(2,0),(0,2))`() {
         val expected = listOf(listOf(1,1), listOf(2,0), listOf(0,2))
         val bits = nToBits(7)

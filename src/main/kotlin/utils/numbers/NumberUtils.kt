@@ -18,10 +18,11 @@ fun factorise(n: Long): Map<Long, Long> {
     return factorise(n, PrimeSieve(maxPrime = lSqrt(n)).sieve())
 }
 
-fun factorise(n: Long, primes: List<Long>): Map<Long, Long> {
+fun factorise(n: Long, primes: List<Long>? = null): Map<Long, Long> {
+    if (n == 0L) return mutableMapOf()
     val factors = mutableMapOf(1L to 1L)
     var latestN = n
-    primes.forEach {
+    (primes ?: PrimeSieve(maxPrime = lSqrt(n)).sieve()).forEach {
         while (it divides latestN) {
             latestN /= it
             val rhs = factors.getOrPut(it) { 0L }
@@ -39,7 +40,8 @@ fun factorise(n: Long, primes: List<Long>): Map<Long, Long> {
 }
 
 // could probably do this faster if done *whilst* getting factors
-fun divisors(n: Long): List<Long> {
+fun divisors(n: Int, primes: List<Long>? = null, properDivisors: Boolean = false) = divisors(n.toLong(), primes, properDivisors)
+fun divisors(n: Long, primes: List<Long>? = null, properDivisors: Boolean = false): List<Long> {
     fun recursiveDivisors(primePowers: List<List<Long>>): List<Long> {
         if (primePowers.size == 1) return primePowers.first()
 
@@ -48,9 +50,12 @@ fun divisors(n: Long): List<Long> {
         return recursiveDivisors(listOf(products) + primePowers.drop(2))
     }
 
-    val factors = factorise(n)
+    if (n == 0L) return listOf()
+
+    val factors = factorise(n, primes)
     val distinctPrimePowers = factors.map { entry -> (1..entry.value).map { entry.key.lPow(it) } }
-    return recursiveDivisors(distinctPrimePowers)
+    val divisors = recursiveDivisors(distinctPrimePowers)
+    return if (properDivisors) divisors.dropLast(1) else divisors
 }
 
 fun numDivisors(n: Long): Long {
