@@ -17,22 +17,7 @@ class NumberLetterCounts: NoArgSolution<Int> {
         From 10-19 its <teen>
         from 20-99 its the <d-digit><s-digit>
         from 100 onwards its <s-digit><hundred><and> the same as for the double digits
-        
-        Note: this one was horrible, so easy to get bogged down if you mapped a word wrong!
     """.trimIndent()
-
-    val more = """
-        eleven 6
-        twelve 6
-        thirteen 8
-        fourteen 8
-        fifteen 7
-        sixteen 7
-        seventeen 9
-        eighteen 8
-        nineteen 8
-       
-    """
 
     val singleDigitMap = mapOf(1 to 3, 2 to 3, 3 to 5, 4 to 4, 5 to 4, 6 to 3, 7 to 5, 8 to 5, 9 to 4)
     val teenMap = mapOf(10 to 3, 11 to 6, 12 to 6, 13 to 8, 14 to 8, 15 to 7, 16 to 7, 17 to 9, 18 to 8, 19 to 8)
